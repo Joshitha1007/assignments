@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="scoreboard.css">
+    <script src="scoreboard.js"></script>
+</head>
+<body>
+    <h1>Scorecard:<span id="runs">0</span><span>/</span><span id="wickets">0</span></h1>
+    <h2>Score line:<span id="line"></span></h2>
+    <div class="d1">
+    <button  onclick="updatescore(event)" id="dot">
+        DOT
+    </button>
+    <button onclick="updatescore(event)" class="run">
+        1
+    </button>
+    <button  onclick="updatescore(event)" class="run">
+        2
+    </button>
+    <button onclick="updatescore(event)" class="run">
+        3
+    </button>
+    <button onclick="updatescore(event)" class="run">
+        4
+    </button>
+    <button onclick="updatescore(event)" class="run">
+        5
+    </button>
+    <button  onclick="updatescore(event)" id="dot">
+        6
+    </button>
+    <button onclick="updatescore(event)" id="wicket">
+        W
+    </button>
+    <button onclick="updatescore(event)" id="wide">
+        Wide
+    </button>
+    <button onclick="updatescore(event)" id="dot">
+        No Ball
+    </button>
+    </div>
+</body>
+
+</html>
