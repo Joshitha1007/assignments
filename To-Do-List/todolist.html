@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var todo=[];
+        function addtodo(){
+            todo.push((document.getElementById("task").value));
+            document.getElementById("task").value=""
+            genlist()
+        }
+        function genlist(){
+            document.getElementById("list").innerHTML=""
+            todo.forEach(function(ele,i){
+                let e=i
+                let nli=document.createElement("li");
+                let btn=document.createElement("button") 
+                nli.innerText=ele;
+                btn.addEventListener("click",function(){
+                    deltodo(e);
+                });
+                btn.innerText="delete"
+                nli.appendChild(btn);
+                document.getElementById("list").appendChild(nli)
+
+                
+            })
+        }
+        function deltodo(j){
+        
+                    todo.splice(j,1);
+                   genlist();
+            
+        }
+        function checkenter(eve){
+            var ch=eve.key;
+            console.log(ch);
+            if(ch==="Enterṅ")
+            addtodo();
+        }
+
+    </script>
+    <h1>to do list</h1>
+    <div style="display: flex;">
+    <input type="text" id="task" onkeypress="checkenter(event)"/>
+    <button onclick="addtodo()" id="add">ADD TODO</button>
+    </div>
+            <ul id="list">
+
+    </ul>
+</body>
+</html>
