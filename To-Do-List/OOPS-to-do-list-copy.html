@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="addtodolist()">ADD todolist</button>
+   <script>
+
+    class todolist{
+        category;
+        todos=[];
+        constructor(cat){
+            this.category=cat;
+            this.inittodolist();
+
+        }
+        inittodolist(){
+            var nul=document.createElement("ul");
+            nul.setAttribute("id",this.category);
+            var nh=document.createElement("h3")
+            nh.innerText=this.category
+            var text=document.createElement("input")
+            text.setAttribute("id",this.category+"box")
+            var btn=document.createElement("button")
+            btn.innerText="ADD TO DO"
+            btn.onclick=genui()
+
+            document.body.appendChild(nh);
+             document.body.appendChild(nul);
+             nul.appendChild(text);
+             nul.appendChild(btn);
+
+        }
+        addtodo(todo){
+            this.todos.push(todo)
+            var nli=document.createElement("li");
+            nli.innerText=todo
+            document.getElementById(this.category).appendChild(nli)
+        }
+        genui(){
+            var todo=document.getElementById(this.category+"box").value;
+            this.todos.push(todo)
+            this.todos.forEach(function(a){
+                var nli=document.createElement("li")
+                nli.innerText=todo;
+                document.getElementById(this.category).appendChild(nli)
+            })
+        }
+    }
+
+    function addtodolist(){
+        var ncat=prompt()
+        var ntodo=new todolist(ncat);
+    }
+   </script> 
+</body>
+</html>
