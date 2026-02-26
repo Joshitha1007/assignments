@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2">
+        <thead>
+            <th onclick="sortdata(event)"> name</th>
+            <th onclick="sortdata(event)"> caloriesPerServing </th>
+            <th onclick="sortdata(event)">cookTimeMinutes</th>
+            <th onclick="sortdata(event)">prepTimeMinutes</th>
+            <th onclick="sortdata(event)"> rating</th>
+        </thead>
+        <tbody id="recipes">
+
+        </tbody>
+        </thead>
+    </table>
+    <div style="display: flex;">
+            <button onclick="previous()" id="p" disabled >previous</button>
+            <button onclick="next()" id="n" >next</button>
+            </div>
+    <script>
+        var food;
+        var skip=0;
+        var limit=10;
+        function gentable(recipes){
+                document.getElementById("recipes").innerHTML=""
+                recipes.forEach(function(r){
+                    var rec=`<tr>
+                        <td>${r.name}</td>
+                        <td>${r.caloriesPerServing}</td>
+                        <td>${r.cookTimeMinutes}</td>
+                        <td>${r.prepTimeMinutes}</td>
+                         <td>${r.rating}</td>`
+                         document.getElementById("recipes").innerHTML+=rec;  
+
+                })
+
+        }
+        function fetchdata(url=`https://dummyjson.com/recipes?limit=${limit}&skip=${skip}`){
+            fetch(url).then(res=>res.json()).then(data=>{
+                console.log(data.recipes);
+                food=data.recipes;
+                gentable(data.recipes);
+
+            })
+        }
+        function sortdata(e){
+            console.log(e);
+            var k=e.target.innerText;
+             if(k=="name"){
+                food.sort(function(a,b){
+                    if(a.name>b.name)
+                    return 1
+                    return -1
+                    
+                })
+                gentable(food)
+             }
+             else if(k=="caloriesPerServing"){
+                food.sort(function(a,b){
+                    if(a.caloriesPerServing>b.caloriesPerServing)
+                    return 1
+                    return -1
+                    
+                })
+                gentable(food)
+             }
+              else if(k=="cookTimeMinutes"){
+                food.sort(function(a,b){
+                    if(a.cookTimeMinutes>b.cookTimeMinutes)
+                    return 1
+                    return -1
+                    
+                })
+                gentable(food)
+             }
+              else if(k=="prepTimeMinutes"){
+                food.sort(function(a,b){
+                    if(a.prepTimeMinutes>b.prepTimeMinutes)
+                    return 1
+                    return -1
+                    
+                })
+                gentable(food)
+             }
+              else if(k=="rating"){
+                food.sort(function(a,b){
+                    if(a.rating>b.rating)
+                    return 1
+                    return -1
+                    
+                })
+                gentable(food)
+             }
+}
+function next(){
+    skip+=10;
+    document.getElementById("p").disabled=false;
+    fetchdata(`https://dummyjson.com/recipes?limit=${limit}&skip=${skip}`)
+    if(skip==30){
+        document.getElementById("n").disabled=true;
+    }
+
+}
+function previous(){
+    skip-=10;
+    document.getElementById("n").disabled=false;
+    fetchdata(`https://dummyjson.com/recipes?limit=${limit}&skip=${skip}`)
+   if(skip==10){
+    
+          document.getElementById("p").disabled=true;
+    }
+
+}
+
+        fetchdata();
+    </script>
+</body>
+</html>
